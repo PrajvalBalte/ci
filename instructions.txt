@@ -1,0 +1,3 @@
+#Ubantu cat input.txt | python3 mapper.py | sort | python3 reducer.py
+#windows cmd type input.txt | python mapper.py | sort | python reducer.py
+#windows powershell Get-Content input.txt | python mapper.py | Sort-Object | python reducer.py

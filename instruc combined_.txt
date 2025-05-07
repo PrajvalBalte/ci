@@ -1,0 +1,2 @@
+#ubantu cat words.txt | python3 combined_mapper.py | sort | python3 combined_reducer.py
+#windows cmd type words.txt | python combined_mapper.py | sort | python combined_reducer.py
