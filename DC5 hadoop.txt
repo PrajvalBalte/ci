@@ -1,0 +1,30 @@
+su hduser
+start-dfs.sh
+start-yarn.sh
+jps
+hdfs dfs -rm -r /input /output
+hdfs dfs -mkdir -p /input
+hdfs dfs -ls /
+nano weather_data.txt
+hdfs dfs -put weather_data.txt /input/
+hdfs dfs -ls /input/
+nano mapper.py
+nano reducer.py
+chmod +x mapper.py
+chmod +x reducer.py
+whereis Hadoop
+ls /usr/local/Hadoop/share
+hadoop jar
+/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar \
+> -input /input/weather_data.txt \
+> -output /output/weather_output \
+> -mapper mapper.py \
+> -reducer reducer.py \
+> -file mapper.py \
+> -file reducer.py
+hdfs dfs -ls /output/weather_output/
+hdfs dfs -cat 
+/output/weather_output/part-00000
+stop-dfs.sh 
+stop-yarn.sh
+

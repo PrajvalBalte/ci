@@ -1,0 +1,50 @@
+##PRT A
+su hduser
+nano word_count.txt
+start-dfs.sh
+start-yarn.sh
+jps
+hdfs dfs -ls /
+hdfs dfs -rm -r /input
+hdfs dfs -rm -r /output
+hdfs dfs -mkdir -p /input
+hdfs dfs -ls /
+hdfs dfs -put word_count.txt /input/
+hdfs dfs -ls /input/
+whereis Hadoop
+hadoop jar 
+/usr/local/hadoop/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.4.jar 
+wordcount /input /output
+hdfs dfs -ls /
+hdfs dfs -ls /output/
+hdfs dfs -cat /output/part-r-00000
+stop-dfs.sh 
+stop-yarn.sh
+##PART B
+su hduser 
+start-dfs.sh
+start-yarn.sh
+jps
+hdfs dfs -mkdir -p /input
+hdfs dfs -ls /
+: hdfs dfs -rm -r /input /output
+nano character_count.txt
+hdfs dfs -put character_count.txt
+ hdfs dfs -ls /input/
+nano mapper.py
+nano reducer.py
+chmod +x mapper.py
+chmod +x reducer.py
+whereis hadoop
+hadoop jar 
+/usr/local/hadoop/share/hadoop/tools/lib/hadoop-streaming-3.3.4.jar \
+> -input /input/character_count.txt \
+> -output /output/character_output \
+> -mapper mapper.py \
+> -reducer reducer.py \
+> -file mapper.py \
+> -file reducer.py
+hdfs dfs -ls /output/character_output/
+hdfs dfs -cat /output/character_output/part-00000
+stop-dfs.sh
+stop-yarn.sh 
